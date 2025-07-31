@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>$Bonkebab - The Ultimate Meme Kebab Experience</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'kebab-orange': '#FF6B35',
+            'kebab-yellow': '#FFA500',
+            'kebab-brown': '#8B4513',
+            'kebab-red': '#DC143C',
+            'kebab-gold': '#FFD700',
+            'kebab-cream': '#FFF8DC',
+            'kebab-dark': '#2C1810'
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- External Libraries -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <style>
+    body {
+      font-family: 'Fredoka', sans-serif;
+    }
+    
+    .kebab-pattern {
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 107, 53, 0.3) 0%, transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(255, 165, 0, 0.25) 0%, transparent 45%),
+        radial-gradient(circle at 40% 70%, rgba(220, 20, 60, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(255, 215, 0, 0.15) 0%, transparent 35%),
+        linear-gradient(45deg, transparent 40%, rgba(255, 107, 53, 0.1) 50%, transparent 60%),
+        linear-gradient(-45deg, transparent 30%, rgba(255, 165, 0, 0.08) 40%, transparent 50%);
+      background-size: 200px 200px, 150px 150px, 180px 180px, 250px 250px, 80px 80px, 120px 120px;
+      background-position: 0 0, 50px 50px, 100px 100px, 150px 150px, 0 0, 75px 75px;
+      animation: kebabFloat 15s ease-in-out infinite;
+    }
+    
+    @keyframes kebabFloat {
+      0%, 100% { 
+        background-position: 0 0, 50px 50px, 100px 100px, 150px 150px, 0 0, 75px 75px;
+      }
+      50% { 
+        background-position: 30px 30px, 80px 80px, 130px 130px, 180px 180px, 30px 30px, 105px 105px;
+      }
+    }
+    
+    .rolling-kebab {
+      width: 120px;
+      height: 120px;
+      position: fixed;
+      bottom: 20px;
+      left: -150px;
+      animation: roll 15s linear infinite;
+      z-index: 1000;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    @keyframes roll {
+      0% { left: -150px; transform: rotate(0deg); }
+      100% { left: 100vw; transform: rotate(1440deg); }
+    }
+    
+    .guide-gif {
+      width: 100%;
+      height: auto;
+      object-fit: fill;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    #guide-arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .guide-toggle-btn.active #guide-arrow {
+      transform: rotate(180deg);
+    }
+    
+    @keyframes bonkAnim {
+      0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 1; }
+      50% { transform: translate(-50%, -50%) scale(1.5) rotate(180deg); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(2) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-kebab-cream via-orange-50 to-yellow-50 min-h-screen kebab-pattern">
+
+  
+  <div class="relative z-20">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-kebab-orange via-kebab-yellow to-kebab-red text-white py-6 shadow-lg relative overflow-hidden">
+      <div class="absolute inset-0 bg-black opacity-10"></div>
+             <div class="relative z-10 text-center">
+                   <img src="logo.png" alt="$Bonkebab Logo" class="w-32 h-32 mx-auto mb-4 rounded-full shadow-lg">
+         <h1 class="text-4xl md:text-6xl font-bold mb-2">
+           $BONKEBAB
+         </h1>
+         <p class="text-xl md:text-2xl font-semibold">
+           The Ultimate Meme Kebab Experience! 🚀
+         </p>
+       </div>
+      <!-- Decorative elements -->
+      <div class="absolute top-0 left-0 w-full h-full opacity-20">
+        <div class="absolute top-4 left-4 text-2xl">🍢</div>
+        <div class="absolute top-4 right-4 text-2xl">🥙</div>
+        <div class="absolute bottom-4 left-4 text-2xl">🌶️</div>
+        <div class="absolute bottom-4 right-4 text-2xl">🧅</div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="container mx-auto px-4 py-12">
+      <div class="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-12 text-center">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-kebab-orange via-kebab-yellow to-kebab-red bg-clip-text text-transparent">
+            Welcome to the Land of Bonk & Kebab
+          </h2>
+          <p class="text-xl md:text-2xl text-gray-700 mb-8">
+            The only place where meme coins and kebabs collide in perfect harmony!
+          </p>
+          <p class="text-xl md:text-md text-gray-700 mb-4">
+           CA: 
+          </p>
+                     <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+             <button class="bg-gradient-to-r from-kebab-orange to-kebab-yellow text-white px-8 py-4 rounded-full text-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300" onclick="bonkAction()">
+               <i class="fas fa-rocket mr-2"></i> Get Bonked! 🍢
+             </button>
+             <a href="#" onclick="bonkAction()" class="bg-black text-white px-8 py-4 rounded-full text-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center">
+               <i class="fab fa-twitter mr-3 text-2xl"></i>
+               Join our Twitter Community
+             </a>
+           </div>
+         
+        </div>
+      </div>
+    </div>
+
+    <!-- Rolling Kebab -->
+
+    <!-- Game Section -->
+    <div class="container mx-auto px-4 py-8">
+      <div class="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8">
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-8 bg-gradient-to-r from-kebab-orange to-kebab-yellow bg-clip-text text-transparent">
+          🍢 Interactive Kebab Game
+        </h2>
+        <p class="text-xl text-center mb-8 text-gray-700">
+          Play the ultimate kebab game! Experience the thrill of making kebabs in this interactive adventure!
+        </p>
+        
+        <!-- Guide Toggle -->
+        <div class="text-center mb-8">
+          <button class="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 guide-toggle-btn" onclick="toggleGuide()">
+            <i class="fas fa-question-circle mr-2"></i> How to Play Guide
+            <i class="fas fa-chevron-down ml-2" id="guide-arrow"></i>
+          </button>
+        </div>
+        
+        <!-- Guide Content -->
+        <div class="game-guide hidden" id="game-guide">
+          <h3 class="text-3xl font-bold text-center mb-8 text-kebab-orange">🎮 How to Play Guide</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-gradient-to-br from-orange-50 to-yellow-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300">
+              <div class="flex items-start gap-4">
+                <div class="bg-gradient-to-r from-kebab-orange to-kebab-yellow text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">1</div>
+                <div>
+                  <h4 class="text-lg font-semibold mb-3 text-gray-800">Check what is needed and go work!</h4>
+                  <img src="https://img.itch.zone/aW1nLzg0NDEwODcuZ2lm/original/xHnLeg.gif" alt="Step 1" class="guide-gif">
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-gradient-to-br from-orange-50 to-yellow-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300">
+              <div class="flex items-start gap-4">
+                <div class="bg-gradient-to-r from-kebab-orange to-kebab-yellow text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">2</div>
+                <div>
+                  <h4 class="text-lg font-semibold mb-3 text-gray-800">Drag and drop all you need</h4>
+                  <img src="https://img.itch.zone/aW1nLzg0NDEwNzguZ2lm/original/Iv6aWg.gif" alt="Step 2" class="guide-gif">
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-gradient-to-br from-orange-50 to-yellow-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300">
+              <div class="flex items-start gap-4">
+                <div class="bg-gradient-to-r from-kebab-orange to-kebab-yellow text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">3</div>
+                <div>
+                  <h4 class="text-lg font-semibold mb-3 text-gray-800">Slice the meat fast!</h4>
+                  <img src="https://img.itch.zone/aW1nLzg0NDEwNzUuZ2lm/original/oLsyF7.gif" alt="Step 3" class="guide-gif">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div class="bg-gradient-to-br from-orange-50 to-yellow-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300">
+              <div class="flex items-start gap-4">
+                <div class="bg-gradient-to-r from-kebab-orange to-kebab-yellow text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">4</div>
+                <div>
+                  <h4 class="text-lg font-semibold mb-3 text-gray-800">Sell it to client</h4>
+                  <img src="https://img.itch.zone/aW1nLzg0NDEwODIuZ2lm/original/Ooj49m.gif" alt="Step 4" class="guide-gif">
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-gradient-to-br from-orange-50 to-yellow-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300">
+              <div class="flex items-start gap-4">
+                <div class="bg-gradient-to-r from-kebab-orange to-kebab-yellow text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">5</div>
+                <div>
+                  <h4 class="text-lg font-semibold mb-3 text-gray-800">Buy upgrade to go fast</h4>
+                  <img src="https://img.itch.zone/aW1nLzg0NDA4NjUucG5n/original/j%2BnbzI.png" alt="Step 5" class="guide-gif">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Game Iframe -->
+        <div class="mt-8">
+          <iframe 
+            src="https://html-classic.itch.zone/html/5442426/index.html" 
+            width="100%" 
+            height="1000" 
+            frameborder="0" 
+            allowfullscreen
+            class="rounded-2xl shadow-2xl">
+          </iframe>
+                 </div>
+       </div>
+     </div>
+
+     <!-- About Us Section -->
+     <div class="container mx-auto px-4 py-12">
+       <div class="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-12">
+         <div class="max-w-4xl mx-auto text-center">
+           <h2 class="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-kebab-orange to-kebab-yellow bg-clip-text text-transparent">
+             About $Bonkebab
+           </h2>
+           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+             <div>
+               <h3 class="text-2xl font-bold mb-4 text-kebab-orange">🍢 Our Love for Kebab</h3>
+               <p class="text-gray-700 leading-relaxed mb-4">
+                 We created $Bonkebab because we have an undying passion for the perfect kebab. 
+                 The sizzle of meat on the grill, the aroma of fresh bread, the perfect blend of 
+                 spices and sauces - it's not just food, it's an art form that brings people together.
+               </p>
+               <p class="text-gray-700 leading-relaxed">
+                 Every kebab tells a story of tradition, community, and the simple joy of sharing 
+                 delicious food with friends. That's why we built this game - to celebrate the 
+                 universal love for kebab and create a community around it.
+               </p>
+             </div>
+             <div>
+               <h3 class="text-2xl font-bold mb-4 text-kebab-orange">🚀 The Token Concept</h3>
+               <p class="text-gray-700 leading-relaxed mb-4">
+                 $Bonkebab is more than just a meme coin - it's a movement celebrating the 
+                 global kebab culture. We believe that the best communities are built around 
+                 shared passions, and what better passion than the love for perfectly crafted kebabs?
+               </p>
+               <p class="text-gray-700 leading-relaxed">
+                 Our token represents the fusion of crypto innovation with street food culture, 
+                 creating a unique ecosystem where kebab enthusiasts can connect, share, and 
+                 grow together in the digital age.
+               </p>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+     <!-- X Community CTA -->
+     <div class="container mx-auto px-4 py-12">
+       <div class="bg-gradient-to-r from-kebab-orange via-kebab-yellow to-kebab-red rounded-3xl shadow-2xl p-8 md:p-12 text-center text-white">
+         <div class="max-w-4xl mx-auto">
+           <div class="text-6xl mb-6">🍢</div>
+           <h2 class="text-4xl md:text-5xl font-bold mb-6">
+             Join Our Kebab Community!
+           </h2>
+           <p class="text-xl md:text-2xl mb-8 opacity-90">
+             Connect with fellow kebab enthusiasts, share your game scores, and stay updated with the latest $Bonkebab news!
+           </p>
+                        <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+               <a href="#" onclick="bonkAction()" class="bg-black text-white px-8 py-4 rounded-full text-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center">
+                 <i class="fab fa-twitter mr-3 text-2xl"></i>
+                 Join Twitter Community
+               </a>
+             </div>
+           <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+             <div class="bg-black/30 backdrop-blur-sm rounded-2xl p-6">
+               <div class="text-3xl mb-2">🎮</div>
+               <h3 class="text-xl font-bold mb-2">Game Updates</h3>
+               <p class="opacity-90">Get the latest game features and improvements</p>
+             </div>
+             <div class="bg-black/30  backdrop-blur-sm rounded-2xl p-6">
+               <div class="text-3xl mb-2">💰</div>
+               <h3 class="text-xl font-bold mb-2">Token News</h3>
+               <p class="opacity-90">Stay informed about $Bonkebab developments</p>
+             </div>
+             <div class="bg-black/30  backdrop-blur-sm rounded-2xl p-6">
+               <div class="text-3xl mb-2">🏆</div>
+               <h3 class="text-xl font-bold mb-2">Community</h3>
+               <p class="opacity-90">Connect with fellow kebab lovers</p>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+     <!-- Info Sections -->
+  
+        
+      
+        
+       
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-kebab-orange via-kebab-yellow to-kebab-red text-brown py-12 mt-12">
+      <div class="container mx-auto px-4 text-center">
+        <div class="text-2xl font-bold mb-4">&copy; 2025 $Bonkebab. All Rights Reserved.</div>
+        <div class="flex justify-center space-x-6 text-2xl">
+          <a href="#" onclick="bonkAction()" class="hover:scale-125 transition-transform duration-300"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+
+
+    // GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
+    
+    gsap.from('.container', {
+      duration: 1,
+      y: 100,
+      opacity: 0,
+      ease: 'power3.out'
+    });
+
+    gsap.from('.grid > div', {
+      duration: 0.8,
+      y: 50,
+      opacity: 0,
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: '.grid',
+        start: 'top 80%'
+      }
+    });
+
+    function toggleGuide() {
+      const guide = document.getElementById('game-guide');
+      const button = document.querySelector('.guide-toggle-btn');
+      
+      if (guide.classList.contains('hidden')) {
+        guide.classList.remove('hidden');
+        button.classList.add('active');
+        // Smooth animation for showing
+        gsap.fromTo(guide, 
+          { opacity: 0, y: -20 },
+          { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
+        );
+      } else {
+        // Smooth animation for hiding
+        gsap.to(guide, {
+          opacity: 0,
+          y: -20,
+          duration: 0.3,
+          ease: 'power2.in',
+          onComplete: () => {
+            guide.classList.add('hidden');
+            button.classList.remove('active');
+          }
+        });
+      }
+    }
+
+    let bonkCount = 0;
+    let kebabRainActive = false;
+
+    function bonkAction() {
+      bonkCount++;
+      
+      // Create bonk effect
+      const bonk = document.createElement('div');
+      bonk.innerHTML = '💥 BONK! 💥';
+      bonk.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 3rem;
+        font-weight: bold;
+        color: #FF6B35;
+        z-index: 10000;
+        pointer-events: none;
+        animation: bonkAnim 1s ease-out forwards;
+      `;
+      
+      document.body.appendChild(bonk);
+      
+      setTimeout(() => {
+        document.body.removeChild(bonk);
+      }, 1000);
+      
+      // Shake the page
+      gsap.to('body', {
+        duration: 0.1,
+        x: 10,
+        yoyo: true,
+        repeat: 5
+      });
+
+      // Show hint on first click
+      if (bonkCount === 1) {
+        const hint = document.createElement('div');
+        hint.innerHTML = '💡 Hint: Click 2 more times for a surprise! 🍢';
+        hint.style.cssText = `
+          position: fixed;
+          top: 20%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: rgba(255, 107, 53, 0.9);
+          color: white;
+          padding: 1rem 2rem;
+          border-radius: 25px;
+          font-size: 1.2rem;
+          font-weight: bold;
+          z-index: 10001;
+          pointer-events: none;
+          animation: hintFade 3s ease-out forwards;
+        `;
+        document.body.appendChild(hint);
+        
+        // Add hint animation
+        const hintStyle = document.createElement('style');
+        hintStyle.textContent = `
+          @keyframes hintFade {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+          }
+        `;
+        document.head.appendChild(hintStyle);
+        
+        setTimeout(() => {
+          if (hint.parentNode) {
+            hint.parentNode.removeChild(hint);
+          }
+        }, 3000);
+      }
+
+      // Check for easter egg (3 clicks)
+      if (bonkCount >= 3 && !kebabRainActive) {
+        kebabRain();
+      }
+    }
+
+    function kebabRain() {
+      kebabRainActive = true;
+      
+      // Create kebab rain container
+      const rainContainer = document.createElement('div');
+      rainContainer.id = 'kebab-rain';
+      rainContainer.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+        overflow: hidden;
+      `;
+      document.body.appendChild(rainContainer);
+
+      // Kebab emojis to rain
+      const kebabs = ['🍢', '🥙', '🌮', '🌯', '🍖', '🥩', '🧅', '🌶️', '🍅', '🥬'];
+      
+      // Create falling kebabs
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const kebab = document.createElement('div');
+          kebab.innerHTML = kebabs[Math.floor(Math.random() * kebabs.length)];
+          kebab.style.cssText = `
+            position: absolute;
+            top: -50px;
+            left: ${Math.random() * 100}%;
+            font-size: ${Math.random() * 30 + 20}px;
+            animation: kebabFall ${Math.random() * 3 + 2}s linear forwards;
+            transform: rotate(${Math.random() * 360}deg);
+          `;
+          rainContainer.appendChild(kebab);
+          
+          // Remove kebab after animation
+          setTimeout(() => {
+            if (kebab.parentNode) {
+              kebab.parentNode.removeChild(kebab);
+            }
+          }, 5000);
+        }, i * 100);
+      }
+
+      // Add kebab rain animation
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes kebabFall {
+          0% {
+            transform: translateY(-50px) rotate(0deg);
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(100vh) rotate(720deg);
+            opacity: 0;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+
+      // Stop rain after 10 seconds
+      setTimeout(() => {
+        if (rainContainer.parentNode) {
+          rainContainer.parentNode.removeChild(rainContainer);
+        }
+        kebabRainActive = false;
+        bonkCount = 0; // Reset counter
+      }, 10000);
+
+      // Add screen shake effect
+      gsap.to('body', {
+        duration: 0.1,
+        x: 20,
+        yoyo: true,
+        repeat: 10
+      });
+    }
+  </script>
+</body>
+</html>
